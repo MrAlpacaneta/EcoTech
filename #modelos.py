@@ -1,10 +1,9 @@
 #modelos.py
 
-# 1. CLASE PADRE (Herencia para evitar duplicación - Criterio 2.1.2.G.4)
+#CLASE PADRE (Herencia para evitar duplicación de datos)
 class UsuarioSistema:
     def __init__(self, id_usuario, username, password, rol, activo=True):
-        # El doble guion bajo (__) aplica el Encapsulamiento (Criterio 2.1.2.G.3)
-        self.__idUsuario = id_usuario
+        self.__idusuario = id_usuario
         self.__username = username
         self.__password = password
         self.__rol = rol
@@ -17,20 +16,42 @@ class UsuarioSistema:
     def cerrar_sesion(self):
         print("Sesión cerrada correctamente.")
 
+    def get_id_usuario(self):
+        return self.__idusuario
+    def get_password(self):
+            return self.__password
+    def get_rol(self):
+            return self.__rol
+    def get_activo(self):
+            return self.__activo
+
 # 2. CLASE HIJA (Empleado hereda de UsuarioSistema)
 class Empleado(UsuarioSistema):
     def __init__(self, id_usuario, username, password, rol, id_empleado, nombre, telefono, correo, fecha_inicio, salario):
-        # super() llama al constructor del padre, reciclando el código de usuario
         super().__init__(id_usuario, username, password, rol)
-        self.__idEmpleado = id_empleado
+        self.__idempleado = id_empleado
         self.__nombre = nombre
         self.__telefono = telefono
         self.__correo = correo
-        self.__fechaInicio = fecha_inicio
+        self.__fechainicio = fecha_inicio
         self.__salario = salario
         self.__departamento = None # Representa la agregación con Departamento (0..*)
 
-    # Métodos accesores (Getters y Setters) para acceder a datos encapsulados
+    def get_id_empleado(self):
+        return self.__idempleado
+
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_telefono(self):
+        return self.__telefono
+
+    def get_correo(self):
+        return self.__correo
+
+    def get_fecha_inicio(self):
+        return self.__fechainicio
+    
     def get_salario(self):
         return self.__salario
 
@@ -39,46 +60,101 @@ class Empleado(UsuarioSistema):
             self.__salario = nuevo_salario
             print("Salario actualizado.")
 
+    def get_departamento(self):
+        return self.__departamento
+
     def asignar_departamento(self, departamento):
         self.__departamento = departamento
 
-# 3. ENTIDADES RESTANTES (Criterio 2.1.1.G.1)
 class Departamento:
     def __init__(self, id_depto, nombre):
-        self.__idDepto = id_depto
+        self.__iddepto = id_depto
         self.__nombre = nombre
         self.__gerente = None
+
+    def get_id_depto(self):
+        return self.__iddepto
+
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_gerente(self):
+        return self.__gerente
+
+    def asignar_gerente(self, empleado):
+        self.__gerente = empleado
 
     def asignar_gerente(self, empleado):
         self.__gerente = empleado
 
 class Proyecto:
     def __init__(self, id_proyecto, nombre, descripcion, fecha_inicio):
-        self.__idProyecto = id_proyecto
+        self.__idproyecto = id_proyecto
         self.__nombre = nombre
         self.__descripcion = descripcion
-        self.__fechaInicio = fecha_inicio
+        self.__fechainicio = fecha_inicio
+
+    def get_id_proyecto(self):
+        return self.__idproyecto
+
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_descripcion(self):
+        return self.__descripcion
+
+    def get_fecha_inicio(self):
+        return self.__fechainicio
 
 class AsignacionProyecto:
-    # Clase asociativa que conecta Empleado y Proyecto (Relaciones - Criterio 2.1.1.G.2)
     def __init__(self, id_asignacion, fecha_asignacion, rol_proyecto, empleado, proyecto):
-        self.__idAsignacion = id_asignacion
-        self.__fechaAsignacion = fecha_asignacion
-        self.__rolProyecto = rol_proyecto
+        self.__idasignacion = id_asignacion
+        self.__fechaasignacion = fecha_asignacion
+        self.__rolproyecto = rol_proyecto
         self.__empleado = empleado   
         self.__proyecto = proyecto   
 
+    def get_id_asignacion(self):
+        return self.__idasignacion
+
+    def get_fecha_asignacion(self):
+        return self.__fechaasignacion
+
+    def get_rol_proyecto(self):
+        return self.__rolproyecto
+
+    def get_empleado(self):
+        return self.__empleado
+
+    def get_proyecto(self):
+        return self.__proyecto    
+
 class RegistroTiempo:
-    # Composición con empleado
     def __init__(self, id_registro, fecha, horas, descripcion, empleado):
-        self.__idRegistro = id_registro
+        self.__idregistro = id_registro
         self.__fecha = fecha
-        self.__horasTrabajadas = horas
-        self.__descripcionTarea = descripcion
+        self.__horastrabajadas = horas
+        self.__descripciontarea = descripcion
         self.__empleado = empleado
+
+    def get_id_registro(self):
+        return self.__idregistro
+
+    def get_fecha(self):
+        return self.__fecha
+
+    def get_horas_trabajadas(self):
+        return self.__horastrabajadas
+
+    def get_descripcion_tarea(self):
+        return self.__descripciontarea
+
+    def get_empleado(self):
+        return self.__empleado
 
 class GestorReportes:
     def generar_reportes_pdf(self):
-        pass
+        print("Generando reportes en PDF...")
     def generar_reportes_excel(self):
-        pass
+        print("Generando reportes en Excel...")
+
