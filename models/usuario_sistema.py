@@ -9,7 +9,6 @@ class UsuarioSistema:
     def iniciar_sesion(self, username_input, password_input):
         try:
             c = ConexionDB()
-            # Buscamos el usuario por su username y password
             sql = "SELECT id_usuario, username, rol FROM usuario_sistema WHERE username = :usr AND password = :pwd AND activo = 1"
             c.cursor.execute(sql, usr=username_input, pwd=password_input)
             

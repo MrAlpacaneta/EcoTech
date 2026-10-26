@@ -44,7 +44,6 @@ if rol_actual:
     depto = Departamento()
     
     while True:
-        # Mostramos un menú distinto según el rol
         if rol_actual == "Administrador":
             imprimir_menu_admin()
         else:

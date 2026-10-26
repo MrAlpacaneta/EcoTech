@@ -35,7 +35,7 @@ class Empleado(UsuarioSistema):
         self.__correo = correo
         self.__fechainicio = fecha_inicio
         self.__salario = salario
-        self.__departamento = None # Representa la agregación con Departamento (0..*)
+        self.__departamento = None 
 
     def get_id_empleado(self):
         return self.__idempleado
