@@ -11,9 +11,8 @@ class ConexionDB:
                 service_name="xe"   
             )
             self.cursor = self.conexion.cursor()
-
+            
         except Exception as e:
             print(f"ERROR CRÍTICO DE CONEXIÓN: Detalle: {e}")
             self.conexion = None
             self.cursor = None
-print("Conexión a la base de datos establecida.")
